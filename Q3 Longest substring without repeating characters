@@ -1,0 +1,24 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if len(s) <= 1:
+            return len(s)
+        front = 0
+        longest = 0
+        seen = set()
+        for back in range(len(s)):
+            # 만약 새로 추가할 문자가 이미 seen(부분 문자열) 안에 있다면
+            while s[back] in seen:
+                # 중복이 없어질 때까지 front를 앞으로 당기면서 문자를 제거합니다.
+                seen.remove(s[front])
+                front += 1
+                
+            # 중복이 없으므로 현재 문자를 seen에 추가합니다.
+            seen.add(s[back])
+            
+            # 가장 긴 길이를 갱신합니다.
+            longest = max(longest, back - front + 1)
+        return longest
