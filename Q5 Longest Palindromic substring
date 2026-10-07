@@ -1,27 +1,27 @@
 class Solution(object):
     def longestPalindrome(self, s):
-        # 1. 예외 처리 (길이가 1이거나 문자열 전체가 이미 팰린드롬인 경우)
+        
         if len(s) < 2 or s == s[::-1]:
             return s
             
-        # 2. 중심을 기준으로 양옆으로 확장하며 팰린드롬을 찾는 내부 함수
+       
         def expand(left, right):
-            # 범위 내에 있고, 양끝 문자가 같을 때까지 확장
+            
             while left >= 0 and right < len(s) and s[left] == s[right]:
                 left -= 1
                 right += 1
-            # 확장이 멈춘 지점에서 안쪽으로 한 칸씩 좁힌 슬라이싱 반환
+            
             return s[left + 1 : right]
             
         result = ""
-        # 3. 모든 글자를 중심으로 두고 검사
+        
         for i in range(len(s)):
-            # 홀수 길이 팰린드롬 (예: b a b -> a가 중심)
+            
             sub1 = expand(i, i)
-            # 짝수 길이 팰린드롬 (예: b b -> bb 사이가 중심)
+            
             sub2 = expand(i, i + 1)
             
-            # 기존에 찾은 result, sub1, sub2 중 가장 길이가 긴 것을 결과로 갱신
+            
             result = max(result, sub1, sub2, key=len)
             
         return result
