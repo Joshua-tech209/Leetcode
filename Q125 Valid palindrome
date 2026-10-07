@@ -1,0 +1,26 @@
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        text = s.replace(" ", "")
+        text = text.lower()
+        if text == "":
+            return True
+        length = len(text)-1
+        s1, s2 = 0, length
+        while s1 < s2:
+            if not text[s1].isalnum():
+                s1 += 1
+                continue
+
+            if not text[s2].isalnum():
+                s2 -= 1
+                continue
+
+            if text[s1] != text[s2]:  
+                return False
+            s1 += 1
+            s2 -= 1
+        return True
