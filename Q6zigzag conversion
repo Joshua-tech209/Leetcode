@@ -1,0 +1,20 @@
+class Solution(object):
+    def convert(self, s, numRows):
+        if numRows == 1 or numRows >= len(s):
+            return s
+            
+        result = ""
+        cycle_len = 2 * numRows - 2  # 정확한 한 주기 길이
+        
+        for i in range(numRows):
+            # 각 행(i)에서 시작
+            for j in range(i, len(s), cycle_len):
+                result += s[j]  # 기본 주기 위치의 문자 추가
+                
+                # 첫 행(0)과 마지막 행(numRows-1)이 아니면서, 
+                # 다음 주기가 시작되기 전 대각선 위치에 문자가 있는 경우
+                diagonal_idx = j + cycle_len - 2 * i
+                if i != 0 and i != numRows - 1 and diagonal_idx < len(s):
+                    result += s[diagonal_idx]
+                    
+        return result
