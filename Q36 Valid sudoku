@@ -1,0 +1,43 @@
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        row, col = len(board),len(board[0])
+        # check row
+        for r in range(row):
+            seen = {}
+            for c in range(col):
+                
+                if board[r][c] in seen:
+                    return False
+                
+                if board[r][c] != ".":
+                    seen[board[r][c]] = 1
+        
+        # check column
+        for c in range(col):
+            seen = {}
+            for r in range(row):
+                
+                if board[r][c] in seen:
+                    return False
+                
+                if board[r][c] != ".":
+                    seen[board[r][c]] = 1
+            
+        #check 3x3 box col
+        for box_row in [0, 3, 6]:
+            for box_col in [0,3,6]:
+
+                seen = {}
+                for r in range(box_row, box_row+3):
+                    for c in range(box_col, box_col+3):
+                        value=board[r][c]
+                        if value in seen:
+                            return False
+
+                        if value != ".":
+                            seen[value] = 1
+        return True
