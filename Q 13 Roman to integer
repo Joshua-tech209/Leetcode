@@ -1,0 +1,49 @@
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        num = 0
+        while s != "":
+            if s[:2] == "CM":
+                s = s[2:]   
+                num += 900
+            elif s[:2] == "CD":
+                s = s[2:]
+                num += 400
+            elif s[:2] == "XC":
+                s = s[2:]
+                num += 90
+            elif s[:2] == "XL":
+                s = s[2:]
+                num += 40
+            elif s[:2] == "IX":
+                s = s[2:]
+                num += 9
+            elif s[:2] == "IV":
+                s = s[2:]
+                num += 4
+            elif s[0] == "M":
+                s = s[1:]
+                num += 1000
+            elif s[0] == "D":
+                s = s[1:]
+                num += 500
+            elif s[0] == "C":
+                s = s[1:]
+                num += 100
+            elif s[0] == "L":
+                s = s[1:]
+                num += 50
+            elif s[0] == "X":
+                s = s[1:]
+                num += 10
+            elif s[0] == "V":
+                s = s[1:]
+                num += 5
+            else: # s[0] == "I"
+                s = s[1:]
+                num += 1
+                
+        return num
